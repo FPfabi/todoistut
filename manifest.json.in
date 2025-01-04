@@ -1,0 +1,15 @@
+{
+    "name": "todoistut.fabianhuck",
+    "description": "inofficial experimental todoist client",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Todoist UT",
+    "hooks": {
+        "todoistut": {
+            "apparmor": "todoistut.apparmor",
+            "desktop":  "todoistut.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Fabian Huck <fabian_huck@web.de>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}

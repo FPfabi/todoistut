@@ -1,0 +1,9 @@
+{
+    "policy_groups": [
+        "content_exchange",
+        "content_exchange_source",
+        "networking",
+        "webview"
+    ],
+    "policy_version": 20.04
+}
