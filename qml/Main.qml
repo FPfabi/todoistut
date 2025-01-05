@@ -134,7 +134,9 @@ MainView {
     function show_comments_popup_dialog(){
         //commentsPopup.cur_task_id = Glob.cur_id;
         console.log("showing comments popup");
-        PopupUtils.open(commentsPopup);
+        commentsPopup.cur_task_id = Glob.cur_id;
+        commentsPopup.task_name = Glob.get_task(Glob.cur_id).content;
+        commentsPopup.open();
     }
 
     //function is not used at the moment. Instead, onEntryLongPressed of Listview is used
@@ -240,9 +242,8 @@ MainView {
         id: taskPopup
     }
     
-    Component {
+    CommentsPopup {
         id: commentsPopup
-        CommentsPopup {}
     }
 
     Component {

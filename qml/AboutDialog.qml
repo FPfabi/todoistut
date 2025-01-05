@@ -9,7 +9,7 @@ Dialog {
     Label {
 		width: parent.width
 		wrapMode: Text.WordWrap
-        text: i18n.tr("This is an example shopping list app designed to teach you Ubuntu Touch app development.")
+        text: i18n.tr("This is an ubuntu touch client for the Todoist REST service. It is implemented via its public python SDK.")
     }
 
     Button {

@@ -1,11 +1,15 @@
 import QtQuick 2.7
+import QtQuick.Controls 2.7
+import QtQuick.Dialogs 1.3
+import Lomiri.Components 1.3
+//import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
+import Qt.labs.settings 1.0
+import io.thp.pyotherside 1.4
 import Ubuntu.Components 1.3
-import Ubuntu.Components.Popups 1.3
-import "Database.js" as Db
 
 
-
-Dialog {
+Popup {
     id: commentsPopup
     property string cur_task_id: ""
     property string task_name: ""
@@ -16,28 +20,60 @@ Dialog {
     
     property var newTask: {}  // stores a copy of the task dictionary
 
+    
     anchors.centerIn: parent
     width: parent.width - units.gu(1)
-            
-    Column {
-        spacing: units.gu(2)
+    
+
+    Column{
         anchors.fill: parent
-        anchors.margins: units.gu(2)
+        spacing: units.gu(1)  
+
+        Label {
+            id: lblTaskName
+            width: parent.width
+            text: "Task: " + task_name
+            font.bold: true
+        }   
 
         UbuntuListView {
             id: commentsListView
             width: parent.width
-            height: parent.height
+            height: units.gu(30)
             model: commentslistModel
-            delegate: Rectangle {
-                height: 25
-                width: 100
-                Text { text: "Content: " + content}
+            delegate: CommentItemDelegate{}
+        }
+
+        Row {
+            id: inputRow
+            width: parent.width
+            spacing: units.gu(1)        
+            
+            TextField {
+                id: textFieldInput
+                width: inputRow.width - buttonAdd.width - inputRow.spacing
+                placeholderText: i18n.tr("New Comment")
+            }
+
+            Button {
+                id: buttonAdd
+                
+                text: i18n.tr('Add')
+                onClicked: {
+                    console.log("Adding comment <" + textFieldInput.text + "> to task id " + commentsPopup.cur_task_id)
+                    py.call('todoist.add_comment', [textFieldInput.text, commentsPopup.cur_task_id], function(retComment) {
+                        // async call
+                        console.log('after add_comment call');
+                        commentslistModel.append(retComment)
+                        textFieldInput.text = "";
+                    });
+                }
             }
         }
 
         Row {
             id: popupRowButtons
+                       
             spacing: units.gu(1)
             Button {
                 text: "Close"
@@ -57,6 +93,5 @@ Dialog {
                 }
             }
         }
-        
     }
 }

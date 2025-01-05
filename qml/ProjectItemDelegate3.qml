@@ -18,10 +18,11 @@ ListItem {
     signal showCommentsPressed(string id);
     
     width: parent.width
-    height: units.gu(10)
+    height: units.gu(8)
 
     MouseArea {
         anchors.fill: parent
+        
         onClicked:{
             if(scope == "ProjectList"){
                 cur_pid = id;
@@ -33,6 +34,8 @@ ListItem {
             entryLongPressed(id);
         }
     }
+
+
     leadingActions: ListItemActions {
         actions: [
             Action {
@@ -47,7 +50,7 @@ ListItem {
 
     Column {
         anchors.fill: parent
-        spacing: 2
+        spacing: 0
 
         Row {
             height: units.gu(4)
@@ -67,7 +70,7 @@ ListItem {
             Rectangle{
                 height: parent.height
                 width: parent.width/3
-
+                
                 Text {
                     id: created_item
                     text: created_at
@@ -158,8 +161,6 @@ ListItem {
                     anchors.margins: units.gu(2)
                 }
 
-
-
                 //Comment icon and comment number
                 Rectangle {
                     id: commentRect
@@ -172,7 +173,7 @@ ListItem {
                         height:units.gu(2)
                         width: parent.width
                         fillMode: Image.PreserveAspectFit
-                        source: "graphics/comment-black.svg"
+                        source: "graphics/comment-black-empty.svg"
                         anchors.centerIn: parent
                     }
                 }

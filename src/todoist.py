@@ -191,6 +191,19 @@ def add_task(pid, content):
   except Exception as error:
       print(error)
       return None
+
+def add_comment(commment, str_task_id):
+  try:
+    new_comment = api.add_comment(
+        content=commment,
+        task_id=str_task_id,
+        attachment=None
+    )
+    print(new_comment)
+    return comment_to_dict(new_comment)
+  except Exception as error:
+    print(error)
+    return None
   
 
 def update_task(tdict):
